@@ -32,7 +32,7 @@ const Property = ()=>{
 
     const fetchProperties = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/properties');
+        const response = await axios.get('https://to-let-property-backend.onrender.com/api/properties');
         setProperties(response.data);
         setSortedProperties(response.data);
       } catch (error) {
@@ -43,7 +43,7 @@ const Property = ()=>{
     const fetchUserProperties = async () => {
       try {
         const token = localStorage.getItem('authToken');
-        const response = await axios.get('http://localhost:3000/api/properties/user/properties', {
+        const response = await axios.get('https://to-let-property-backend.onrender.com/api/properties/user/properties', {
           headers: {
             'Authorization': token
           }
@@ -59,7 +59,7 @@ const Property = ()=>{
       if (window.confirm('Are you sure you want to delete this property?')) {
         try {
           const token = localStorage.getItem('authToken');
-          await axios.delete(`http://localhost:3000/api/properties/${propertyId}`, {
+          await axios.delete(`https://to-let-property-backend.onrender.com/api/properties/${propertyId}`, {
             headers: {
               'Authorization': token
             }
@@ -155,7 +155,7 @@ const Property = ()=>{
                   {/* Property Image */}
                   {property.photos && property.photos.length > 0 ? (
                     <img 
-                      src={`http://localhost:3000${property.photos[0]}`} 
+                      src={`https://to-let-property-backend.onrender.com${property.photos[0]}`} 
                       alt={`${property.spaceType} in ${property.locality}`}
                       className="w-full h-40 object-cover"
                     />

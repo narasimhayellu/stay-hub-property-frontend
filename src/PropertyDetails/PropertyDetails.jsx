@@ -27,7 +27,7 @@ const PropertyDetails = () => {
 
   const fetchPropertyDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/properties/${id}`);
+      const response = await axios.get(`https://to-let-property-backend.onrender.com/api/properties/${id}`);
       setProperty(response.data);
       setLoading(false);
     } catch (error) {
@@ -75,7 +75,7 @@ const PropertyDetails = () => {
               {property.photos && property.photos.length > 0 ? (
                 <div>
                   <img
-                    src={`http://localhost:3000${property.photos[selectedImage]}`}
+                    src={`https://to-let-property-backend.onrender.com${property.photos[selectedImage]}`}
                     alt={`Property ${selectedImage + 1}`}
                     className="w-full h-96 object-cover"
                   />
@@ -84,7 +84,7 @@ const PropertyDetails = () => {
                       {property.photos.map((photo, index) => (
                         <img
                           key={index}
-                          src={`http://localhost:3000${photo}`}
+                          src={`https://to-let-property-backend.onrender.com${photo}`}
                           alt={`Thumbnail ${index + 1}`}
                           className={`w-full h-20 object-cover cursor-pointer rounded ${
                             selectedImage === index ? 'ring-2 ring-blue-500' : ''

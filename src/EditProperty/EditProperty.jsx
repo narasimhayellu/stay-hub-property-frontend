@@ -77,7 +77,7 @@ const EditProperty = () => {
   const fetchPropertyDetails = async () => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await axios.get(`http://localhost:3000/api/properties/${id}`, {
+      const response = await axios.get(`https://to-let-property-backend.onrender.com/api/properties/${id}`, {
         headers: {
           'Authorization': token
         }
@@ -211,7 +211,7 @@ const EditProperty = () => {
 
     try {
       const token = localStorage.getItem('authToken');
-      await axios.put(`http://localhost:3000/api/properties/${id}`, data, {
+      await axios.put(`https://to-let-property-backend.onrender.com/api/properties/${id}`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': token
@@ -405,7 +405,7 @@ const EditProperty = () => {
                     {existingPhotos.map((photo, index) => (
                       <div key={index} className={`relative group ${photosToDelete.includes(photo) ? 'opacity-50' : ''}`}>
                         <img
-                          src={`http://localhost:3000${photo}`}
+                          src={`https://to-let-property-backend.onrender.com${photo}`}
                           alt={`Current ${index + 1}`}
                           className="w-full h-32 object-cover rounded-lg border border-gray-300"
                         />

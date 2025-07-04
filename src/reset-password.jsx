@@ -23,7 +23,7 @@ const ResetPassword = () => {
     }
 
     try {
-      const res = await axios.post(`http://localhost:3000/users/forgot-password/${token}`, { password });
+      const res = await axios.post(`https://to-let-property-backend.onrender.com/users/forgot-password/${token}`, { password });
       enqueueSnackbar(res.data.message || "Password reset successful", { variant: "success" });
       navigate("/login");
     } catch (err) {

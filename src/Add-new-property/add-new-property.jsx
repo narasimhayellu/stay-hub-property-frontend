@@ -150,7 +150,7 @@ const AddNewProperty = () => {
 
     try {
       const token = localStorage.getItem('authToken');
-      await axios.post("http://localhost:3000/api/properties", data, {
+      await axios.post("https://to-let-property-backend.onrender.com/api/properties", data, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': token
