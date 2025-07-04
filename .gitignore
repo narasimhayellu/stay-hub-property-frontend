@@ -35,5 +35,8 @@ lerna-debug.log*
 *.sln
 *.sw?
 
+# Claude
+.claude/
+
 # OS generated files
 Thumbs.db
