@@ -1,0 +1,120 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  min-height: 100vh;
+}
+
+.box-container {
+  height: 760px;
+  width: 400px;
+  margin-top: 55px;
+  border-radius: 50px 5px;
+  margin-bottom: 100px;
+}
+
+.box-container::before {
+  position: absolute;
+  width: 170%;
+  height: 170%;
+  content: "";
+  background-image: conic-gradient(
+    transparent,
+    transparent,
+    transparent,
+    #3cbdb1
+  );
+  animation: rotate_border 6s linear infinite;
+}
+
+.box-container::after {
+  position: absolute;
+  width: 170%;
+  height: 170%;
+  content: "";
+  background-image: conic-gradient(
+    transparent,
+    transparent,
+    transparent,
+    #c8a217
+  );
+  animation: rotate_border 6s linear infinite;
+  animation-delay: -3s;
+}
+
+@keyframes rotate_border {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.box-container h1 {
+  text-align: center;
+  font-size: 35px;
+  margin-top: 10px;
+  color: white;
+}
+
+.form-group {
+  margin-left: 12px;
+  margin-right: 12px;
+  display: flex;
+  padding: 20px;
+}
+
+.form-group input {
+  width: 100%;
+  font-size: 1rem;
+  border-bottom: 2px solid white;
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+}
+
+.form-group select {
+  color: rgb(30, 190, 190);
+  border-bottom: 2px solid white;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: black;
+}
+
+.form-group input::placeholder {
+  color: rgb(30, 190, 190);
+}
+
+.form-group input:hover {
+  border-bottom: 2px solid white;
+}
+
+.register {
+  border: 1px solid rgb(228, 183, 34);
+  width: 300px;
+  height: 40px;
+  border-radius: 30px;
+  margin-top: 20px;
+  color: white;
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: lighter;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.register:hover {
+  background-color: rgb(228, 183, 34);
+  color: white;
+}
+
+.register:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.register:disabled:hover {
+  background-color: transparent;
+  color: white;
+}
