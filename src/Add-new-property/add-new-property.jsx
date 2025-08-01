@@ -171,13 +171,13 @@ const AddNewProperty = () => {
   };
 
   return (
-    <div className="bg-black min-h-screen py-10 px-4">
+    <div className="bg-gray-100 min-h-screen py-10 px-4">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold mb-6 text-gray-800">Add New Property</h2>
+        <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">Add New Property</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Owner Information */}
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold mb-3 text-gray-700">Owner Information</h3>
+            <h3 className="text-lg font-semibold mb-3 text-gray-700 text-center">Owner Information</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <input type="text" name="firstName" placeholder="First Name *" value={form.firstName} onChange={handleChange} className="border border-gray-300 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500" required />
               <input type="text" name="lastName" placeholder="Last Name *" value={form.lastName} onChange={handleChange} className="border border-gray-300 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500" required />
@@ -188,17 +188,17 @@ const AddNewProperty = () => {
 
           {/* Location Information */}
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold mb-3 text-gray-700">Location Details</h3>
+            <h3 className="text-lg font-semibold mb-3 text-gray-700 text-center">Location Details</h3>
             <input type="text" name="locality" placeholder="Locality *" value={form.locality} onChange={handleChange} className="border border-gray-300 p-3 rounded-md w-full mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
             <textarea name="address" placeholder="Full Address *" value={form.address} onChange={handleChange} className="border border-gray-300 p-3 rounded-md w-full mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3" required></textarea>
           </div>
 
           {/* Map for location selection */}
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold mb-3 text-gray-700">
+            <h3 className="text-lg font-semibold mb-3 text-gray-700 text-center">
               Select Property Location
             </h3>
-            <p className="text-sm text-gray-600 mb-2">Click on the map to set the exact location</p>
+            <p className="text-sm text-gray-600 mb-2 text-center">Click on the map to set the exact location</p>
             <div className="h-96 w-full border-2 border-gray-300 rounded-lg overflow-hidden">
               <MapContainer 
                 center={mapPosition} 
@@ -220,7 +220,7 @@ const AddNewProperty = () => {
 
           {/* Property Type & Details */}
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold mb-3 text-gray-700">Property Details</h3>
+            <h3 className="text-lg font-semibold mb-3 text-gray-700 text-center">Property Details</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <select name="spaceType" value={form.spaceType} onChange={handleChange} className="border border-gray-300 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 <option value="">Select Space Type *</option>
@@ -279,7 +279,7 @@ const AddNewProperty = () => {
         
           {/* Financial Details */}
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold mb-3 text-gray-700">Financial Details</h3>
+            <h3 className="text-lg font-semibold mb-3 text-gray-700 text-center">Financial Details</h3>
             <div className="grid md:grid-cols-3 gap-4">
               <input type="number" name="rent" placeholder="Monthly Rent (₹) *" value={form.rent} onChange={handleChange} className="border border-gray-300 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500" required />
               <input type="number" name="maintenance" placeholder="Maintenance Charges (₹)" value={form.maintenance} onChange={handleChange} className="border border-gray-300 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
@@ -289,7 +289,7 @@ const AddNewProperty = () => {
 
           {/* Amenities */}
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold mb-3 text-gray-700">Amenities</h3>
+            <h3 className="text-lg font-semibold mb-3 text-gray-700 text-center">Amenities</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {['Gym', 'Swimming Pool', 'Park', 'Security', 'Lift', 'Power Backup', 'Water Supply', 'Club House'].map((amenity) => (
                 <label key={amenity} className="flex items-center space-x-2 cursor-pointer hover:bg-gray-100 p-2 rounded">
@@ -307,7 +307,7 @@ const AddNewProperty = () => {
 
           {/* Appliances */}
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold mb-3 text-gray-700">Appliances</h3>
+            <h3 className="text-lg font-semibold mb-3 text-gray-700 text-center">Appliances</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {['TV', 'Refrigerator', 'Washing Machine', 'Microwave', 'Water Heater', 'Air Conditioner', 'Kitchen Stove', 'WiFi'].map((appliance) => (
                 <label key={appliance} className="flex items-center space-x-2 cursor-pointer hover:bg-gray-100 p-2 rounded">
@@ -325,7 +325,7 @@ const AddNewProperty = () => {
 
           {/* Photos & Description */}
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold mb-3 text-gray-700">Photos & Description</h3>
+            <h3 className="text-lg font-semibold mb-3 text-gray-700 text-center">Photos & Description</h3>
             <div className="space-y-4">
               <div>
                 <input

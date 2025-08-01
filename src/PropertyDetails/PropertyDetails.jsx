@@ -39,27 +39,27 @@ const PropertyDetails = () => {
 
   if (loading) {
     return (
-      <div className="bg-black min-h-screen flex items-center justify-center">
-        <div className="text-white text-xl">Loading property details...</div>
+      <div className="bg-gray-100 min-h-screen flex items-center justify-center">
+        <div className="text-gray-800 text-xl">Loading property details...</div>
       </div>
     );
   }
 
   if (!property) {
     return (
-      <div className="bg-black min-h-screen flex items-center justify-center">
-        <div className="text-white text-xl">Property not found</div>
+      <div className="bg-gray-100 min-h-screen flex items-center justify-center">
+        <div className="text-gray-800 text-xl">Property not found</div>
       </div>
     );
   }
 
   return (
-    <div className="bg-black min-h-screen py-10 px-4">
+    <div className="bg-gray-100 min-h-screen py-10 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="mb-6 text-white flex items-center gap-2 hover:text-gray-300 transition"
+          className="mb-6 text-gray-800 flex items-center gap-2 hover:text-gray-600 transition"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

@@ -102,7 +102,7 @@ const Property = ()=>{
 
     return(
         <>
-        <div className='bg-black min-h-screen'>
+        <div className='bg-gray-100 min-h-screen'>
           {/* Filters and Sort */}
           <div className="p-4 flex flex-col md:flex-row justify-center items-center gap-4">
             <select
@@ -143,7 +143,7 @@ const Property = ()=>{
 
           {/* Property Cards Section */}
           <div className="px-4 pb-10">
-            <h2 className="text-2xl font-bold mb-6 text-center text-white">
+            <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
               Available Properties
             </h2>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">

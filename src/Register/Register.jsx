@@ -89,11 +89,11 @@ const Register = () => {
     <>
       <div className="wrapper">
         <form onSubmit={submitHandler}>
-          <div className="box-container relative bg-black flex items-center justify-center overflow-hidden">
-            <div className="absolute bg-black rounded-[50px_5px] inset-1 p-[50px_40px] z-10 text-white">
-              <h1>Register</h1>
+          <div className="box-container relative bg-white flex items-center justify-center overflow-hidden">
+            <div className="absolute bg-white rounded-[50px_5px] inset-1 p-[50px_40px] z-10 text-black">
+              <h1 className="text-center">Register</h1>
               <div className="form-group">
-                <PersonIcon className="mt-3 text-white" />
+                <PersonIcon className="mt-3 text-gray-600" />
                 <input
                   className="border-0 outline-none relative flex items-center justify-start"
                   onChange={onHandleChange}
@@ -104,7 +104,7 @@ const Register = () => {
                 />
               </div>
               <div className="form-group">
-                <PersonIcon className="mt-3 text-white" />
+                <PersonIcon className="mt-3 text-gray-600" />
                 <input
                   className="border-0 outline-none relative flex items-center justify-start"
                   onChange={onHandleChange}
@@ -115,7 +115,7 @@ const Register = () => {
                 />
               </div>
               <div className="form-group">
-                <MailOutlineIcon className="mt-3 text-white" />
+                <MailOutlineIcon className="mt-3 text-gray-600" />
                 <input
                   className="border-0 outline-none relative flex items-center justify-start"
                   onChange={onHandleChange}
@@ -126,7 +126,7 @@ const Register = () => {
                 />
               </div>
               <div className="form-group">
-                <LockIcon className="mt-3 text-white" />
+                <LockIcon className="mt-3 text-gray-600" />
                 <input
                   className="border-0 outline-none relative flex items-center justify-start"
                   onChange={onHandleChange}
@@ -137,7 +137,7 @@ const Register = () => {
                 />
               </div>
               <div className="form-group">
-                <PhoneIcon className="mt-3 text-white" />
+                <PhoneIcon className="mt-3 text-gray-600" />
                 <input
                   className="border-0 outline-none relative flex items-center justify-start"
                   onChange={onHandleChange}
@@ -148,7 +148,7 @@ const Register = () => {
                 />
               </div>
               <div className="form-group">
-                <BadgeIcon className="mt-3 text-white" />
+                <BadgeIcon className="mt-3 text-gray-600" />
                 <select
                   className="border-0 outline-none relative flex items-center justify-start"
                   name="role"
@@ -161,7 +161,7 @@ const Register = () => {
                 </select>
               </div>
               <div className="form-group">
-                <AccountBalanceIcon className="mt-3 text-white" />
+                <AccountBalanceIcon className="mt-3 text-gray-600" />
                 <input
                   className="border-0 outline-none relative flex items-center justify-start"
                   onChange={onHandleChange}

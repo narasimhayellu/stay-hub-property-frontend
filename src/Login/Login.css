@@ -47,7 +47,7 @@
 }
 
 .card {
-  background-color: black;
+  background-color: #ffffff;
   padding: 30px;
   border-radius: 50px 5px;
   position: relative;
@@ -57,13 +57,13 @@
 .box {
   display: flex;
   justify-content: center;
-  background-color: black;
   min-height: 100vh;
+  background-color: #f5f5f5;
 }
 
 .box h1 {
   text-align: center;
-  color: #f3e8e8;
+  color: #333333;
   font-size: 28px;
   margin-top: 40px;
 }
@@ -76,16 +76,18 @@
 }
 
 .card-box input {
-  color: rgb(243, 227, 227);
-  background-color: black;
+  color: #333333;
+  background-color: transparent;
   width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
-  border-bottom: 2px solid white;
+  border: none;
+  border-bottom: 2px solid #cccccc;
+  outline: none;
 }
 
 .card-box input:hover {
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid #999999;
 }
 
 .card-box input::placeholder {
@@ -98,7 +100,7 @@
   height: 40px;
   border-radius: 30px;
   margin-top: 30px;
-  color: white;
+  color: rgb(228, 183, 34);
   cursor: pointer;
   font-size: 25px;
   font-weight: lighter;

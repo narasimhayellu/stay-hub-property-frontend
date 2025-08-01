@@ -1,4 +1,4 @@
-# To-Let Globe Property Management System
+# Stay Hub Property Management System
 
 A modern property rental management application built with React and Vite, featuring location-based property listings, user authentication, and comprehensive property management capabilities.
 
@@ -25,8 +25,8 @@ A modern property rental management application built with React and Vite, featu
 
 1. Clone the repository
 ```bash
-git clone https://github.com/narasimhayellu/to-let-property-frontend.git
-cd to-let-property-frontend
+git clone https://github.com/narasimhayellu/stay-hub-property-frontend.git
+cd stay-hub-property-frontend
 ```
 
 2. Install dependencies
@@ -133,7 +133,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🙏 Acknowledgments
 
-- To-Let Globe for the project inspiration
+- Stay Hub team for the project vision
 - React and Vite communities for excellent documentation
 - OpenStreetMap for map data
 

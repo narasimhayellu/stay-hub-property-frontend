@@ -29,13 +29,8 @@ const Header = () => {
         width: '100%',
         boxSizing: 'border-box'
       }}>
-        <Link to="/" style={{ marginRight: '20px' }}>
-          <img
-            className="logo ms-6 mt-2"
-            src="https://www.toletglobe.in/assets/logo-ClaEJkU2.png"
-            alt=""
-            style={{ height: '40px' }}
-          />
+        <Link to="/" style={{ textDecoration: 'none', marginRight: '30px' }}>
+          <h1 style={{ color: '#ffffff', fontSize: '24px', fontWeight: 'bold', margin: 0 }}>Stay Hub</h1>
         </Link>
         <Link to="/home" className="home">
           <button className="button w-15">Home</button>

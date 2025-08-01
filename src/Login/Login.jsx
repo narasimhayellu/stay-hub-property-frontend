@@ -50,7 +50,7 @@ const Login = () => {
         <form onSubmit={submitHandler}>
         <div className="card-wrapper flex items-center justify-center">
         <div className="card ">
-          <h1>Login </h1>
+          <h1 className="text-center">Login </h1>
             <div className="card-box">
               <MailOutlineIcon className="mt-3 text-white" />
               <input
