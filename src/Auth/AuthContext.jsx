@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (formData) => {
     try {
       const response = await axios.post(
-        "https://to-let-authentication-backend.onrender.com/users/login",
+        "https://to-let-property-backend.onrender.com/users/login",
         formData
       );
       const { token, user } = response.data;
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (formData) => {
     try {
       const response = await axios.post(
-        "https://to-let-authentication-backend.onrender.com/users/register",
+        "https://to-let-property-backend.onrender.com/users/register",
         formData
       );
       const { token, user } = response.data;
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
   const forgotPassword = async (formData) => {
     try {
       const response = await axios.post(
-        "https://to-let-authentication-backend.onrender.com/users/forgot-password",
+        "https://to-let-property-backend.onrender.com/users/forgot-password",
         formData
       );
       console.log("Forgot password response:", response.data);

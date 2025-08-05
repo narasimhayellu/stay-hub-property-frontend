@@ -73,8 +73,7 @@ src/
 ### Backend API
 
 The application connects to a backend API hosted at:
-- Authentication: `https://to-let-authentication-backend.onrender.com`
-- Property Management: `https://to-let-property-backend.onrender.com`
+- Backend API: `https://to-let-property-backend.onrender.com`
 
 To use your own backend, update the API endpoints in the respective components.
 
