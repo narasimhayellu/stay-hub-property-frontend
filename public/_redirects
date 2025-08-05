@@ -1,0 +1,6 @@
+# Proxy API requests to backend
+/api/* https://to-let-property-backend.onrender.com/api/:splat 200
+/users/* https://to-let-authentication-backend.onrender.com/users/:splat 200
+
+# SPA fallback
+/* /index.html 200
