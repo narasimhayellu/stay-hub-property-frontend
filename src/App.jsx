@@ -9,6 +9,11 @@ import Property from "./Property/Property";
 import AddNewProperty from "./Add-new-property/add-new-property";
 import PropertyDetails from "./PropertyDetails/PropertyDetails";
 import EditProperty from "./EditProperty/EditProperty";
+import AboutUs from "./AboutUs/AboutUs";
+import Contact from "./Contact/Contact";
+import Blog from "./Blog/Blog";
+import BlogDetails from "./Blog/BlogDetails";
+import AddBlog from "./Blog/AddBlog";
 
 function App() {
   return (
@@ -26,6 +31,11 @@ function App() {
           <Route path="/add-new-property" element={<AddNewProperty/>}/>
           <Route path="/property/:id" element={<PropertyDetails/>}/>
           <Route path="/property/:id/edit" element={<EditProperty/>}/>
+          <Route path="/about" element={<AboutUs/>}/>
+          <Route path="/contact" element={<Contact/>}/>
+          <Route path="/blog" element={<Blog/>}/>
+          <Route path="/blog/add" element={<AddBlog/>}/>
+          <Route path="/blog/:id" element={<BlogDetails/>}/>
         </Routes>
       </div>
     </>

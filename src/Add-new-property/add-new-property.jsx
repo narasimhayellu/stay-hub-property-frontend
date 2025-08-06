@@ -29,7 +29,7 @@ const LocationMarker = ({ position, setPosition }) => {
 const AddNewProperty = () => {
   const navigate = useNavigate();
   const { isLogin } = useContext(AuthContext);
-  const [mapPosition, setMapPosition] = useState([26.8500, 80.9500]); // Default to Lucknow
+  const [mapPosition, setMapPosition] = useState([17.3850, 78.4867]); // Default to Hyderabad
   
   // Check if user is logged in
   useEffect(() => {
@@ -45,8 +45,8 @@ const AddNewProperty = () => {
     altContact: "",
     locality: "",
     address: "",
-    latitude: 26.8500,
-    longitude: 80.9500,
+    latitude: 17.3850,
+    longitude: 78.4867,
     spaceType: "",
     petsAllowed: "No",
     preference: "",

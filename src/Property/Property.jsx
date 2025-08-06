@@ -98,7 +98,7 @@ const Property = ()=>{
 
     // Display all sorted properties
     const displayProperties = sortedProperties;
-    const position = [26.8500, 80.9500];
+    const position = [17.3850, 78.4867]; // Hyderabad
 
     return(
         <>
