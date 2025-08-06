@@ -20,15 +20,12 @@ const AddBlog = () => {
   const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
-    // Check if user is logged in and is a content creator
+    // Check if user is logged in
     if (!isLogin) {
       enqueueSnackbar('Please login to create a blog', { variant: 'error' });
       navigate('/login');
-    } else if (user && user.role !== 'content_creator') {
-      enqueueSnackbar('Only content creators can add blogs. Please login as a content creator.', { variant: 'warning' });
-      navigate('/blog');
     }
-  }, [isLogin, user, navigate]);
+  }, [isLogin, navigate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
