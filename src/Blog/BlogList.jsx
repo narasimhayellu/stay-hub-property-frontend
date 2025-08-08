@@ -27,11 +27,16 @@ const BlogList = () => {
           sortBy: sortBy
         }
       });
-      setBlogs(response.data.blogs);
-      setTotalPages(response.data.totalPages);
+      setBlogs(response.data.blogs || []);
+      setTotalPages(response.data.totalPages || 1);
       setError(null);
     } catch (err) {
-      setError('Failed to fetch blogs');
+      if (err.response?.status === 404) {
+        setError('Blog service is currently unavailable');
+        setBlogs([]);
+      } else {
+        setError('Failed to fetch blogs');
+      }
       console.error('Error fetching blogs:', err);
     } finally {
       setLoading(false);
