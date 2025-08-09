@@ -20,7 +20,7 @@ const BlogList = () => {
   const fetchBlogs = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/blogs`, {
+      const response = await axios.get('/api/blogs', {
         params: {
           page: currentPage,
           limit: blogsPerPage,
@@ -55,6 +55,11 @@ const BlogList = () => {
       setSortBy(newSortBy);
       setCurrentPage(1);
     }
+  };
+
+  const handleBlogDelete = (blogId) => {
+    // Remove the deleted blog from the list
+    setBlogs(prevBlogs => prevBlogs.filter(blog => blog._id !== blogId));
   };
 
   if (loading) {
@@ -111,7 +116,7 @@ const BlogList = () => {
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {blogs.map((blog) => (
-              <BlogCard key={blog._id} blog={blog} />
+              <BlogCard key={blog._id} blog={blog} onDelete={handleBlogDelete} />
             ))}
           </div>
 

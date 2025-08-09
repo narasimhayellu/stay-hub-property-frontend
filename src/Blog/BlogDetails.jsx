@@ -1,16 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Calendar, User, Eye, Heart, ArrowLeft, Tag } from 'lucide-react';
+import { Calendar, User, Eye, Heart, ArrowLeft, Tag, Trash2, Edit } from 'lucide-react';
 import axios from 'axios';
 import { API_BASE_URL } from '../config/api';
+import { useSnackbar } from 'notistack';
 
 const BlogDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [liked, setLiked] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  
+  // Get current user from localStorage
+  const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
+  
+  // Debug logging
+  useEffect(() => {
+    if (blog && currentUser) {
+      console.log('Current user:', currentUser);
+      console.log('Blog author:', blog.author);
+      console.log('User ID:', currentUser.id || currentUser._id);
+      console.log('Author ID:', blog.author?._id || blog.author);
+    }
+  }, [blog, currentUser]);
 
   useEffect(() => {
     fetchBlogDetails();
@@ -19,12 +36,12 @@ const BlogDetails = () => {
   const fetchBlogDetails = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/blogs/${id}`);
+      const response = await axios.get(`/api/blogs/${id}`);
       setBlog(response.data);
       setError(null);
       
       // Increment view count
-      await axios.post(`${API_BASE_URL}/api/blogs/${id}/view`);
+      await axios.post(`/api/blogs/${id}/view`);
     } catch (err) {
       setError('Failed to fetch blog details');
       console.error('Error fetching blog details:', err);
@@ -35,7 +52,7 @@ const BlogDetails = () => {
 
   const handleLike = async () => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/blogs/${id}/like`);
+      const response = await axios.post(`/api/blogs/${id}/like`);
       setBlog(prev => ({
         ...prev,
         likes: liked ? prev.likes - 1 : prev.likes + 1
@@ -43,6 +60,25 @@ const BlogDetails = () => {
       setLiked(!liked);
     } catch (err) {
       console.error('Error liking blog:', err);
+    }
+  };
+
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    try {
+      const token = localStorage.getItem('authToken');
+      await axios.delete(`/api/blogs/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      enqueueSnackbar('Blog deleted successfully!', { variant: 'success' });
+      navigate('/blogs');
+    } catch (err) {
+      enqueueSnackbar(err.response?.data?.message || 'Failed to delete blog', { variant: 'error' });
+    } finally {
+      setIsDeleting(false);
+      setShowDeleteConfirm(false);
     }
   };
 
@@ -93,9 +129,22 @@ const BlogDetails = () => {
         )}
 
         <div className="p-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            {blog.title}
-          </h1>
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-4xl font-bold text-gray-800">
+              {blog.title}
+            </h1>
+            {/* Show delete button only if current user is the author */}
+            {currentUser && blog.author && 
+             currentUser.id === blog.author._id && (
+              <button
+                onClick={() => setShowDeleteConfirm(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+              >
+                <Trash2 size={18} />
+                Delete
+              </button>
+            )}
+          </div>
 
           <div className="flex items-center justify-between mb-6 pb-6 border-b">
             <div className="flex items-center gap-6 text-gray-600">
@@ -153,6 +202,34 @@ const BlogDetails = () => {
           />
         </div>
       </article>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 className="text-xl font-bold mb-4">Confirm Delete</h3>
+            <p className="text-gray-600 mb-6">
+              Are you sure you want to delete this blog post? This action cannot be undone.
+            </p>
+            <div className="flex gap-4 justify-end">
+              <button
+                onClick={() => setShowDeleteConfirm(false)}
+                className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+                disabled={isDeleting}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDelete}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 disabled:opacity-50"
+                disabled={isDeleting}
+              >
+                {isDeleting ? 'Deleting...' : 'Delete'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

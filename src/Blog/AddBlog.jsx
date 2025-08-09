@@ -85,6 +85,11 @@ const AddBlog = () => {
       enqueueSnackbar('Please fill in all required fields', { variant: 'error' });
       return;
     }
+    
+    if (!formData.coverImage) {
+      enqueueSnackbar('Please upload a cover image for your blog', { variant: 'error' });
+      return;
+    }
 
     setLoading(true);
     try {
@@ -97,17 +102,36 @@ const AddBlog = () => {
       }
 
       const token = localStorage.getItem('authToken');
-      const response = await axios.post(`${API_BASE_URL}/api/blogs`, data, {
+      
+      if (!token) {
+        enqueueSnackbar('Please login to create a blog post', { variant: 'error' });
+        navigate('/login');
+        return;
+      }
+      
+      console.log('Submitting blog with token:', token ? 'Token exists' : 'No token');
+      
+      const response = await axios.post('/api/blogs', data, {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data'
+          'Authorization': `Bearer ${token}`
+          // Don't set Content-Type for FormData - axios will set it automatically with boundary
         }
       });
 
       enqueueSnackbar('Blog created successfully!', { variant: 'success' });
       navigate(`/blog/${response.data._id}`);
     } catch (err) {
-      enqueueSnackbar(err.response?.data?.message || 'Failed to create blog', { variant: 'error' });
+      console.error('Blog creation error:', err.response?.status, err.response?.data);
+      
+      if (err.response?.status === 401) {
+        enqueueSnackbar('Your session has expired. Please login again.', { variant: 'error' });
+        localStorage.removeItem('authToken');
+        navigate('/login');
+      } else if (err.response?.status === 500) {
+        enqueueSnackbar('Server error. Please check if you are logged in and try again.', { variant: 'error' });
+      } else {
+        enqueueSnackbar(err.response?.data?.message || 'Failed to create blog', { variant: 'error' });
+      }
     } finally {
       setLoading(false);
     }
@@ -160,8 +184,8 @@ const AddBlog = () => {
                   className="cursor-pointer flex flex-col items-center"
                 >
                   <Upload size={48} className="text-gray-400 mb-4" />
-                  <span className="text-gray-600">Click to upload cover image</span>
-                  <span className="text-sm text-gray-500 mt-2">Maximum size: 5MB</span>
+                  <span className="text-gray-600">Click to upload cover image <span className="text-red-500">*</span></span>
+                  <span className="text-sm text-gray-500 mt-2">Maximum size: 5MB (Required)</span>
                 </label>
               </div>
             ) : (

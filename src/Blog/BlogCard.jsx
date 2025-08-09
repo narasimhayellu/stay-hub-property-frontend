@@ -1,18 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, User, Eye, Heart } from 'lucide-react';
+import { Calendar, User, Eye, Heart, Trash2, MoreVertical } from 'lucide-react';
+import axios from 'axios';
+import { useSnackbar } from 'notistack';
 
-const BlogCard = ({ blog }) => {
+const BlogCard = ({ blog, onDelete }) => {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+  const [showMenu, setShowMenu] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  // Get current user from localStorage
+  const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
+  // User from login has 'id', blog author has '_id'
+  const isOwner = currentUser && blog.author && 
+                  currentUser.id === blog.author._id;
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    // Don't navigate if clicking on menu or delete button
+    if (e.target.closest('.menu-button') || e.target.closest('.menu-dropdown')) {
+      return;
+    }
     navigate(`/blog/${blog._id}`);
+  };
+
+  const handleDelete = async (e) => {
+    e.stopPropagation();
+    if (!window.confirm('Are you sure you want to delete this blog?')) {
+      return;
+    }
+    
+    setIsDeleting(true);
+    try {
+      const token = localStorage.getItem('authToken');
+      await axios.delete(`/api/blogs/${blog._id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      enqueueSnackbar('Blog deleted successfully!', { variant: 'success' });
+      if (onDelete) {
+        onDelete(blog._id);
+      }
+    } catch (err) {
+      enqueueSnackbar(err.response?.data?.message || 'Failed to delete blog', { variant: 'error' });
+    } finally {
+      setIsDeleting(false);
+      setShowMenu(false);
+    }
   };
 
   return (
     <div 
       onClick={handleClick}
-      className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer overflow-hidden"
+      className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer overflow-hidden relative"
     >
       {blog.coverImage && (
         <div className="h-48 overflow-hidden">
@@ -24,9 +65,23 @@ const BlogCard = ({ blog }) => {
         </div>
       )}
       <div className="p-6">
-        <h2 className="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">
-          {blog.title}
-        </h2>
+        <div className="flex justify-between items-start mb-2">
+          <h2 className="text-xl font-semibold text-gray-800 line-clamp-2 flex-1">
+            {blog.title}
+          </h2>
+          {isOwner && (
+            <button
+              className="menu-button ml-2 p-1 hover:bg-gray-100 rounded"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDelete(e);
+              }}
+              disabled={isDeleting}
+            >
+              <Trash2 size={18} className={`${isDeleting ? 'text-gray-400' : 'text-red-500 hover:text-red-600'}`} />
+            </button>
+          )}
+        </div>
         <p className="text-gray-600 mb-4 line-clamp-3">
           {blog.content.replace(/<[^>]*>/g, '')}
         </p>

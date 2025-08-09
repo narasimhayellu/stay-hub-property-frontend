@@ -1,6 +1,6 @@
 import { enqueueSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
 export const AuthContext = createContext();
@@ -10,7 +10,11 @@ export const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("isLogin") || "false")
   );
 
-  const [user, setUser] = useState(null);
+  // Initialize user from localStorage
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
   const navigate = useNavigate();
 
@@ -22,6 +26,7 @@ export const AuthProvider = ({ children }) => {
       );
       const { token, user } = response.data;
       localStorage.setItem("authToken", token);
+      localStorage.setItem("user", JSON.stringify(user)); // Store user data
       setUser(user);
       setIsLogin(true);
       localStorage.setItem("isLogin", JSON.stringify(true));
@@ -36,6 +41,8 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setIsLogin(false);
     localStorage.setItem("isLogin", JSON.stringify(false));
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("user"); // Clear user data
     setUser(null);
     navigate("/");
     enqueueSnackbar("logout successful", { variant: "success" });
@@ -50,6 +57,7 @@ export const AuthProvider = ({ children }) => {
       );
       const { token, user } = response.data;
       localStorage.setItem("authToken", token);
+      localStorage.setItem("user", JSON.stringify(user)); // Store user data in register too
       setUser(user);
       console.log(response.data);
       enqueueSnackbar("Signup successful!", { variant: "success" });
