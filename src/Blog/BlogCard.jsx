@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, User, Eye, Heart, Trash2, MoreVertical } from 'lucide-react';
+import { Calendar, User, Eye, Heart, Trash2, Edit2 } from 'lucide-react';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 
@@ -70,16 +70,27 @@ const BlogCard = ({ blog, onDelete }) => {
             {blog.title}
           </h2>
           {isOwner && (
-            <button
-              className="menu-button ml-2 p-1 hover:bg-gray-100 rounded"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleDelete(e);
-              }}
-              disabled={isDeleting}
-            >
-              <Trash2 size={18} className={`${isDeleting ? 'text-gray-400' : 'text-red-500 hover:text-red-600'}`} />
-            </button>
+            <div className="flex gap-1 ml-2">
+              <button
+                className="menu-button p-1 hover:bg-gray-100 rounded"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/blog/${blog._id}/edit`);
+                }}
+              >
+                <Edit2 size={18} className="text-blue-500 hover:text-blue-600" />
+              </button>
+              <button
+                className="menu-button p-1 hover:bg-gray-100 rounded"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDelete(e);
+                }}
+                disabled={isDeleting}
+              >
+                <Trash2 size={18} className={`${isDeleting ? 'text-gray-400' : 'text-red-500 hover:text-red-600'}`} />
+              </button>
+            </div>
           )}
         </div>
         <p className="text-gray-600 mb-4 line-clamp-3">

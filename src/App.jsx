@@ -14,6 +14,7 @@ import Contact from "./Contact/Contact";
 import Blog from "./Blog/Blog";
 import BlogDetails from "./Blog/BlogDetails";
 import AddBlog from "./Blog/AddBlog";
+import EditBlog from "./Blog/EditBlog";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/blog" element={<Blog/>}/>
           <Route path="/blog/add" element={<AddBlog/>}/>
+          <Route path="/blog/:id/edit" element={<EditBlog/>}/>
           <Route path="/blog/:id" element={<BlogDetails/>}/>
         </Routes>
       </div>

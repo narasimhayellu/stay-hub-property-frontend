@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Calendar, User, Eye, Heart, ArrowLeft, Tag, Trash2, Edit } from 'lucide-react';
+import { Calendar, User, Eye, Heart, ArrowLeft, Tag, Trash2, Edit2 } from 'lucide-react';
 import axios from 'axios';
 import { API_BASE_URL } from '../config/api';
 import { useSnackbar } from 'notistack';
@@ -133,16 +133,25 @@ const BlogDetails = () => {
             <h1 className="text-4xl font-bold text-gray-800">
               {blog.title}
             </h1>
-            {/* Show delete button only if current user is the author */}
+            {/* Show edit and delete buttons only if current user is the author */}
             {currentUser && blog.author && 
              currentUser.id === blog.author._id && (
-              <button
-                onClick={() => setShowDeleteConfirm(true)}
-                className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
-              >
-                <Trash2 size={18} />
-                Delete
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => navigate(`/blog/${id}/edit`)}
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                >
+                  <Edit2 size={18} />
+                  Edit
+                </button>
+                <button
+                  onClick={() => setShowDeleteConfirm(true)}
+                  className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                >
+                  <Trash2 size={18} />
+                  Delete
+                </button>
+              </div>
             )}
           </div>
 
